@@ -18,8 +18,6 @@ namespace CodeBase.ColourPicker
 
         [SerializeField] private MeshRenderer _changeThisColor;
 
-        [SerializeField] private SvImageControl _svImageControl;
-
         private void Start()
         {
             CreateHueImage();

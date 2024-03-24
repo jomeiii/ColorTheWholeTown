@@ -1034,10 +1034,10 @@ RectTransform:
   - {fileID: 1037659851}
   m_Father: {fileID: 893784812}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 800, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &771416465
 MonoBehaviour:
@@ -2384,7 +2384,7 @@ GameObject:
   - component: {fileID: 1772220381}
   - component: {fileID: 1772220380}
   m_Layer: 5
-  m_Name: Colour Picker
+  m_Name: Color Picker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2411,10 +2411,10 @@ RectTransform:
   - {fileID: 325897571}
   m_Father: {fileID: 321756665}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -16, y: -16}
+  m_SizeDelta: {x: 1044, y: 984}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1772220380
 MonoBehaviour:
@@ -2475,7 +2475,6 @@ MonoBehaviour:
   _hueSlider: {fileID: 947128859}
   _hexInputField: {fileID: 1534573442}
   _changeThisColor: {fileID: 1593666406}
-  _svImageControl: {fileID: 0}
 --- !u!1 &2029553726
 GameObject:
   m_ObjectHideFlags: 0
