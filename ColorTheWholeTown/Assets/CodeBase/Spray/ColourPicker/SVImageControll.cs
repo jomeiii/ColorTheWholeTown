@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeBase.ColourPicker
+namespace CodeBase.Spray.ColourPicker
 {
     public class SvImageControl : MonoBehaviour
     {
@@ -19,32 +19,34 @@ namespace CodeBase.ColourPicker
             _pickerTransform = _pickerImage.GetComponent<RectTransform>();
             _pickerTransform.localPosition =
                 new Vector2(-(_rectTransform.sizeDelta.x / 2), -(_rectTransform.sizeDelta.y / 2));
+
+            if (_colorPickerControl == null) Debug.LogError("Error");
         }
 
         private void Update()
         {
-            if (Input.GetMouseButton(0) &&
-                RectTransformUtility.RectangleContainsScreenPoint(_rectTransform, Input.mousePosition, Camera.main))
+            if (Input.GetMouseButton(0))
             {
-                UpdateColor();
+                Vector2 pos;
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(_rectTransform,
+                    Input.mousePosition, null, out pos);
+
+                if (_rectTransform.rect.Contains(pos))
+                {
+                    UpdateColor(pos);
+                }
             }
         }
 
-        private void UpdateColor()
+        private void UpdateColor(Vector2 localCursorPos)
         {
-            Vector2 pos;
-
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(_rectTransform,
-                Input.mousePosition,
-                Camera.main, out pos);
-
             float deltaX = _rectTransform.sizeDelta.x / 2;
             float deltaY = _rectTransform.sizeDelta.y / 2;
 
-            float xNorm = (pos.x + deltaX) / _rectTransform.sizeDelta.x;
-            float yNorm = (pos.y + deltaY) / _rectTransform.sizeDelta.y;
+            float xNorm = (localCursorPos.x + deltaX) / _rectTransform.sizeDelta.x;
+            float yNorm = (localCursorPos.y + deltaY) / _rectTransform.sizeDelta.y;
 
-            _pickerTransform.localPosition = pos;
+            _pickerTransform.localPosition = localCursorPos;
 
             _colorPickerControl.SetSv(xNorm, yNorm);
         }

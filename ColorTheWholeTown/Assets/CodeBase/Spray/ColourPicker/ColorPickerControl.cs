@@ -1,8 +1,9 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
+using ColorUtility = UnityEngine.ColorUtility;
 
-namespace CodeBase.ColourPicker
+namespace CodeBase.Spray.ColourPicker
 {
     public class ColorPickerControl : MonoBehaviour
     {
@@ -14,9 +15,9 @@ namespace CodeBase.ColourPicker
 
         [SerializeField] private TMP_InputField _hexInputField;
 
-        private Texture2D _hueTexture, _svTexture, _outputTexture;
+        [SerializeField] private MeshRenderer _dempBlock;
 
-        [SerializeField] private MeshRenderer _changeThisColor;
+        private Texture2D _hueTexture, _svTexture, _outputTexture;
 
         private void Start()
         {
@@ -85,19 +86,28 @@ namespace CodeBase.ColourPicker
 
         private void UpdateOutputColorImage()
         {
-            Color currentColor = Color.HSVToRGB(currentHue, currentSat, currentVal);
-
-            for (int i = 0; i < _outputTexture.height; i++)
+            if (_outputTexture != null && _outputImage != null && _hexInputField != null)
             {
-                _outputTexture.SetPixel(0, i, currentColor);
+                Color currentColor = Color.HSVToRGB(currentHue, currentSat, currentVal);
+
+                for (int i = 0; i < _outputTexture.height; i++)
+                {
+                    _outputTexture.SetPixel(0, i, currentColor);
+                }
+
+                _outputTexture.Apply();
+
+                _hexInputField.text = ColorUtility.ToHtmlStringRGB(currentColor);
+
+                MaterialExporter.AddMaterialToReserves(currentColor);
+                _dempBlock.material.color = currentColor;
             }
-
-            _outputTexture.Apply();
-
-            _hexInputField.text = ColorUtility.ToHtmlStringRGB(currentColor);
-
-            _changeThisColor.material.SetColor("_Color", currentColor);
+            else
+            {
+                Debug.LogError("One or more required components is null.");
+            }
         }
+
 
         public void SetSv(float s, float v)
         {
