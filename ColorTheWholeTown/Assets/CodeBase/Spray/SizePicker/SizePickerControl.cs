@@ -8,10 +8,10 @@ namespace CodeBase.Spray.SizePicker
         [SerializeField] private Slider _slider;
         [SerializeField] private Transform _demoBlock;
 
-        private void Start()
+        private void OnEnable()
         {
-            _demoBlock.localScale = BlockSpawner.BlockSize;
             _slider.value = BlockSpawner.BlockSize.x;
+            _demoBlock.localScale = BlockSpawner.BlockSize;
         }
 
         public void OnValueChanged()

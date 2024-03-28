@@ -1,6 +1,4 @@
 ﻿using CodeBase.Manager;
-using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace CodeBase.Spray
@@ -14,20 +12,20 @@ namespace CodeBase.Spray
 
         private void Awake()
         {
-            if (_blockSpawner == null) _blockSpawner = GetComponent<BlockSpawner>();
+            if (_blockSpawner == null) 
+                _blockSpawner = GetComponent<BlockSpawner>();
         }
 
         private void Update()
         {
-            // Лавая кнопка мыши
-            if (Input.GetMouseButton(0) && !PauseManager.IsPause)
+            if (!PauseManager.IsPause)
             {
-                Spawn();
-            }
-            // Правая кнопка мыши
-            else if (Input.GetMouseButton(1) && !PauseManager.IsPause)
-            {
-                Delete();
+                // Левая кнопка мыши
+                if (Input.GetMouseButton(0))
+                    Spawn();
+                // Правая кнопка мыши
+                else if (Input.GetMouseButton(1))
+                    Delete();
             }
         }
 
@@ -37,7 +35,7 @@ namespace CodeBase.Spray
 
             if (Physics.Raycast(_point.position, _point.forward, out hit, _range, _layerMask))
             {
-                _blockSpawner.SpawnBlock(hit.point);
+                _blockSpawner.SpawnBlock(hit.transform, hit.point);
                 Debug.DrawRay(_point.position, _point.forward * hit.distance, Color.green, 2);
             }
         }
@@ -51,9 +49,7 @@ namespace CodeBase.Spray
                 Debug.DrawRay(_point.position, _point.forward * hit.distance, Color.red, 2);
 
                 if (hit.collider.GetComponent<SprayBlock>() != null)
-                {
                     Destroy(hit.collider.gameObject);
-                }
             }
         }
     }
