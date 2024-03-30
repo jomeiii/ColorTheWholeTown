@@ -56,6 +56,8 @@ namespace CodeBase.Character
             _characterController.Move(_velocity * Time.deltaTime);
         }
 
+        
+
         private void CheckGround()
         {
             _isGrounded = Physics.Raycast(transform.position, Vector3.down, _groundDistance, _groundMask);

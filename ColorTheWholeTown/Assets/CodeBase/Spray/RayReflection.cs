@@ -35,6 +35,7 @@ namespace CodeBase.Spray
 
             if (Physics.Raycast(_point.position, _point.forward, out hit, _range, _layerMask))
             {
+                //_blockSpawner.SpawnBlock(hit.transform, hit.point);
                 _blockSpawner.SpawnBlock(hit.transform, hit.point);
                 Debug.DrawRay(_point.position, _point.forward * hit.distance, Color.green, 2);
             }
